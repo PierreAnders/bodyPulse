@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Height</th>
                 <th>Weight</th>
+                <th>IMC</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,8 +19,9 @@
         {% for user_information in user_informations %}
             <tr>
                 <td>{{ user_information.id }}</td>
-                <td>{{ user_information.height }}</td>
-                <td>{{ user_information.weight }}</td>
+                <td>{{ user_information.height }}m</td>
+                <td>{{ user_information.weight }}kg</td>
+                <td>{{ user_information.bmi|round(1) }}</td>
                 <td>
                     <a href="{{ path('app_user_information_show', {'id': user_information.id}) }}">show</a>
                     <a href="{{ path('app_user_information_edit', {'id': user_information.id}) }}">edit</a>

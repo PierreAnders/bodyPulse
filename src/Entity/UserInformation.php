@@ -19,6 +19,9 @@ class UserInformation
     #[ORM\Column]
     private ?float $weight = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $bmi = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -47,4 +50,26 @@ class UserInformation
 
         return $this;
     }
+
+    public function getBmi(): ?float
+    {
+        return $this->bmi;
+    }
+
+    public function setBmi(?float $bmi): self
+    {
+        $this->bmi = $bmi;
+
+        return $this;
+    }
+
+    public function calculateBmi(): self
+    {
+    if ($this->height !== null && $this->weight !== null) {
+        $this->bmi = $this->weight / ($this->height ** 2);
+    }
+
+    return $this;
+}
+
 }

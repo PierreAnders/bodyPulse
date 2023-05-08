@@ -29,12 +29,13 @@ class UserInformationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $userInformation->calculateBmi();
             $userInformationRepository->save($userInformation, true);
 
             return $this->redirectToRoute('app_user_information_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user_information/new.html.twig', [
+        return $this->render('user_information/new.html.twig', [
             'user_information' => $userInformation,
             'form' => $form,
         ]);
@@ -55,12 +56,13 @@ class UserInformationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $userInformation->calculateBmi();
             $userInformationRepository->save($userInformation, true);
 
             return $this->redirectToRoute('app_user_information_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user_information/edit.html.twig', [
+        return $this->render('user_information/edit.html.twig', [
             'user_information' => $userInformation,
             'form' => $form,
         ]);
