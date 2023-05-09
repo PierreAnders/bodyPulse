@@ -8,7 +8,11 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                {# <th>Id</th> #}
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Gender</th>
+                <th>Date of birth</th>
                 <th>Height</th>
                 <th>Weight</th>
                 <th>IMC</th>
@@ -18,7 +22,11 @@
         <tbody>
         {% for user_information in user_informations %}
             <tr>
-                <td>{{ user_information.id }}</td>
+                {# <td>{{ user_information.id }}</td> #}
+                <td>{{ user_information.firstName }}</td>
+                <td>{{ user_information.lastName }}</td>
+                <td>{{ user_information.gender}}</td>
+                <th>{{ user_information.dateOfBirth|date('Y-m-d') }}</th>
                 <td>{{ user_information.height }}m</td>
                 <td>{{ user_information.weight }}kg</td>
                 <td>{{ user_information.bmi|round(1) }}</td>
@@ -34,6 +42,5 @@
         {% endfor %}
         </tbody>
     </table>
-
     <a href="{{ path('app_user_information_new') }}">Create new</a>
 {% endblock %}

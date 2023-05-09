@@ -12,6 +12,10 @@ class UserInformationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('firstName')
+            ->add('lastName')
+            ->add('gender')
+            ->add('dateOfBirth')
             ->add('height')
             ->add('weight')
         ;

@@ -7,9 +7,25 @@
 
     <table class="table">
         <tbody>
-            <tr>
+            {# <tr>
                 <th>Id</th>
                 <td>{{ user_information.id }}</td>
+            </tr> #}
+            <tr>
+                <th>First name</th>
+                <td>{{ user_information.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Last name</th>
+                <td>{{ user_information.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ user_information.gender }}</td>
+            </tr>
+              <tr>
+                <th>Date of birth</th>
+                <td>{{ user_information.dateOfBirth|date('Y-m-d') }}</td>
             </tr>
             <tr>
                 <th>Height</th>
