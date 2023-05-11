@@ -14,7 +14,7 @@
 			</li>
 			{% if app.user %}
 				<li>
-					<a href="#" class="text-gray-700 hover:text-blue-600">dashboard</a>
+					<a href="{{ path('dashboard')}}" class="text-gray-700 hover:text-blue-600">dashboard</a>
 				</li>
 				<a href="{{ path('app_logout') }}" class="text-gray-700 hover:text-blue-600">logout</a>
 				<li>
