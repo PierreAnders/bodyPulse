@@ -17,9 +17,9 @@ module.exports = {
   plugins: [
     function({ addUtilities }) {
       const newUtilities = {
-        '.underline-offset-8': {
+        '.underline-offset-4': {
           textDecoration: 'underline',
-          textUnderlineOffset: '8px',
+          textUnderlineOffset: '4px',
         },
       }
 
