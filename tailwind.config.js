@@ -9,10 +9,21 @@ module.exports = {
     extend: {
       fontFamily: {
         'comfortaa': ['Comfortaa', 'sans-serif'],
+        'roboto': ['Roboto', 'sans-serif'],
+        'roboto-slab': ['Roboto Slab', 'serif'],
       },
     },
   },
   plugins: [
-    require('flowbite/plugin')
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.underline-offset-8': {
+          textDecoration: 'underline',
+          textUnderlineOffset: '8px',
+        },
+      }
+
+      addUtilities(newUtilities)
+    }
   ],
 }
