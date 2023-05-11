@@ -1,6 +1,6 @@
-<nav class="bg-white shadow-md fixed w-full z-10">
+<nav class="bg-white shadow-md fixed w-full">
 	<div class="container mx-auto px-4 py-2 flex justify-between items-center">
-		<a href="#" class="text-xl font-bold font-comfortaa">PULSE</a>
+		<button class="text-xl font-bold font-comfortaa" id="pulse-link">PULSE</button>
 		<button id="burger-menu" class="block">
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
 				<path strokelinecap="round" strokelinejoin="round" strokewidth="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -10,23 +10,33 @@
 	<div id="menu" class="hidden absolute w-full bg-white shadow-md">
 		<ul class="container mx-auto px-4 py-2 flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4">
 			<li>
-				<a href="#" class="text-gray-700 hover:text-blue-600">Home</a>
+				<a href="{{ path('index') }}" class="text-gray-700 hover:text-blue-600">home</a>
 			</li>
-			<li>
-				<a href="#" class="text-gray-700 hover:text-blue-600">About</a>
-			</li>
-			<li>
-				<a href="#" class="text-gray-700 hover:text-blue-600">Services</a>
-			</li>
-			<li>
-				<a href="#" class="text-gray-700 hover:text-blue-600">Contact</a>
-			</li>
+			{% if app.user %}
+				<li>
+					<a href="#" class="text-gray-700 hover:text-blue-600">dashboard</a>
+				</li>
+				<a href="{{ path('app_logout') }}" class="text-gray-700 hover:text-blue-600">logout</a>
+				<li>
+				{% else %}
+					<li>
+						<a href="{{ path('app_login') }}" class="text-gray-700 hover:text-blue-600">login</a>
+					</li>
+					<li>
+						<a href="{{ path('app_register') }}" class="text-gray-700 hover:text-blue-600">sign in</a>
+					</li>
+			{% endif %}
 		</ul>
 	</div>
 </nav>
 <script>
 	document.getElementById('burger-menu').addEventListener('click', () => {
-    const menu = document.getElementById('menu');
-    menu.classList.toggle('hidden');
-    });
+	const menu = document.getElementById('menu');
+	menu.classList.toggle('hidden');
+	});
+
+	document.getElementById('pulse-link').addEventListener('click', () => {
+	const menu = document.getElementById('menu');
+	menu.classList.toggle('hidden');
+});
 </script>
