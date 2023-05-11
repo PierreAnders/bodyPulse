@@ -3,20 +3,24 @@
 {% block title %}dashboard{% endblock %}
 
 {% block body %}
-<body class="bg-emerald-700 bg-opacity-50 min-h-screen">
-	<div class="flex items-center justify-center min-h-screen flex-col">
-		<div>
-			<h1 class="text-6xl font-bold text-white font-comfortaa mb-4">DASHBOARD</h1>
-		</div>
-		<div class="mb-4">
-			<a href="{{ path('app_user_information_index') }}" class="text-2xl font-bold text-white font-comfortaa">informations</a>
-		</div>
-        <div class="mb-4">
-			<a href="#" class="text-2xl font-bold text-white font-comfortaa">health quizz</a>
-		</div>
-        <div class="mb-4">
-			<a href="#" class="text-2xl font-bold text-white font-comfortaa">documents</a>
-		</div>
-	</div>
-</body>
+<div class="pt-20 flex items-center justify-center">
+    <img src="{{ asset('img/female.svg') }}" alt="Description">
+    <div>
+        {% for user_information in user_informations %}
+            <div class="p-8">
+                <div class="pt-2"><span class="font-bold text-xl font-comfortaa"> {{ user_information.firstName }} </span> <span class="font-bold text-xl font-comfortaa">{{ user_information.lastName }} </span></div>
+                <div class="pt-2"><span class="font-bold text-xl font-comfortaa">{{ user_information.height }}m / </span><span class="font-bold text-xl font-comfortaa">{{ user_information.weight }}kg </span></div>
+                <div class="pt-2"><span class="font-bold text-xl font-comfortaa">BMI {{ user_information.bmi|round(1) }} </span></div>
+                <div class="mt-2">
+                    {# <a href="{{ path('app_user_information_show', {'id': user_information.id}) }}" class="text-blue-500">show</a> #}
+                    {# <a href="{{ path('app_user_information_edit', {'id': user_information.id}) }}" class="font-bold text-lg font-comfortaa underline-offset-4">edit</a> #}
+                </div>
+            </div>
+        {% else %}
+            <div class="border p-4">
+                <div class="font-bold">No records found</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
