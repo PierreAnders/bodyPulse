@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}dashboard{% endblock %}
+
+{% block body %}
+<body class="bg-emerald-700 bg-opacity-50 min-h-screen">
+	<div class="flex items-center justify-center min-h-screen flex-col">
+		<div>
+			<h1 class="text-6xl font-bold text-white font-comfortaa mb-4">DASHBOARD</h1>
+		</div>
+		<div class="mb-4">
+			<a href="{{ path('app_user_information_index') }}" class="text-2xl font-bold text-white font-comfortaa">informations</a>
+		</div>
+        <div class="mb-4">
+			<a href="#" class="text-2xl font-bold text-white font-comfortaa">health quizz</a>
+		</div>
+        <div class="mb-4">
+			<a href="#" class="text-2xl font-bold text-white font-comfortaa">documents</a>
+		</div>
+	</div>
+</body>
+{% endblock %}
