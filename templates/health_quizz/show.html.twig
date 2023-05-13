@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HealthQuizz{% endblock %}
+
+{% block body %}
+    <h1>HealthQuizz</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ health_quizz.id }}</td>
+            </tr>
+            <tr>
+                <th>PhysicalActivity</th>
+                <td>{{ health_quizz.physicalActivity ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>GoodEndurance</th>
+                <td>{{ health_quizz.goodEndurance ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>GoodMuscularStrength</th>
+                <td>{{ health_quizz.goodMuscularStrength ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>GoodFlexibility</th>
+                <td>{{ health_quizz.goodFlexibility ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>LowLevelOfStress</th>
+                <td>{{ health_quizz.lowLevelOfStress ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>GoodSleepQuality</th>
+                <td>{{ health_quizz.goodSleepQuality ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>HealthyRelationships</th>
+                <td>{{ health_quizz.healthyRelationships ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>EmotionalWellBeing</th>
+                <td>{{ health_quizz.emotionalWellBeing ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>RegularConsumptionOfFruitsAndVegetables</th>
+                <td>{{ health_quizz.regularConsumptionOfFruitsAndVegetables ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AdequateProteinIntake</th>
+                <td>{{ health_quizz.adequateProteinIntake ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AdequateFiberIntake</th>
+                <td>{{ health_quizz.adequateFiberIntake ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AdequateHydratation</th>
+                <td>{{ health_quizz.adequateHydratation ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>NonSmoker</th>
+                <td>{{ health_quizz.nonSmoker ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ModerateOrNoAlcoholConsumption</th>
+                <td>{{ health_quizz.moderateOrNoAlcoholConsumption ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>GoodStressManagement</th>
+                <td>{{ health_quizz.goodStressManagement ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>SufficientAndQualitySleep</th>
+                <td>{{ health_quizz.sufficientAndQualitySleep ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>RegularMedicalExaminations</th>
+                <td>{{ health_quizz.regularMedicalExaminations ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>UpToDateVaccinations</th>
+                <td>{{ health_quizz.UpToDateVaccinations ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AbsenceOfUntreatedChronicHealthIssues</th>
+                <td>{{ health_quizz.absenceOfUntreatedChronicHealthIssues ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>MaintainingHealthyWeight</th>
+                <td>{{ health_quizz.maintainingHealthyWeight ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_health_quizz_index') }}">back to list</a>
+
+    <a href="{{ path('app_health_quizz_edit', {'id': health_quizz.id}) }}">edit</a>
+
+    {{ include('health_quizz/_delete_form.html.twig') }}
+{% endblock %}
