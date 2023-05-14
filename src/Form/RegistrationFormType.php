@@ -19,9 +19,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                // 'label' => 'Email Address',
                 'attr' => [
-                    // 'placeholder' => 'Enter your email address',
                     'class' => 'mt-8'
                 ]
                 ])
