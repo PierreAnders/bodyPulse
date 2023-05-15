@@ -1,15 +1,73 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit HealthQuizz{% endblock %}
+{% block title %}Health Quizz
+{% endblock %}
 
 {% block body %}
-<div class="pt-20">
-    <h1>Edit HealthQuizz</h1>
-
-    {{ include('health_quizz/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_health_quizz_index') }}">back to list</a>
-
-    {{ include('health_quizz/_delete_form.html.twig') }}
-</div>
+	<div class="flex h-screen">
+		<div class="w-full h-full bg-emerald-700 bg-opacity-50 flex justify-center pt-20">
+			<div>
+            <h1 class="font-bold text-xl font-comfortaa">Health Quizz</h1>
+                <div class="w-full md:w-auto">
+                    <table class="flex my-10">
+                        <thead>
+                            <tr class="flex flex-col">
+                                <th class="text-left">Physical Activity</th>
+                                <th class="text-left">Good Endurance</th>
+                                <th class="text-left">Good Muscular Strength</th>
+                                <th class="text-left">Good Flexibility</th>
+                                <th class="text-left">Low Level Of Stress</th>
+                                <th class="text-left">Good Sleep Quality</th>
+                                <th class="text-left">Healthy Relationships</th>
+                                <th class="text-left">Emotional Well Being</th>
+                                <th class="text-left">Regular Consumption Of Fruits</th>
+                                <th class="text-left">Adequate Protein Intake</th>
+                                <th class="text-left">Adequate Fiber Intake</th>
+                                <th class="text-left">Adequate Hydratation</th>
+                                <th class="text-left">Non Smoker</th>
+                                <th class="text-left">Moderate Or No Alcohol Consumption</th>
+                                <th class="text-left">Good Stress Management</th>
+                                <th class="text-left">Sufficient And Quality Sleep</th>
+                                <th class="text-left">Regular Medical Examinations</th>
+                                <th class="text-left">Up To Date Vaccinations</th>
+                                <th class="text-left">Absence Of Untreated Chronic Health</th>
+                                <th class="text-left">Maintaining Healthy Weight</th>
+                                <th class="text-left"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="flex flex-col">
+                                {{ form_start(form) }}
+                                <td class="text-right">{{ form_widget(form.physicalActivity) }}</td>
+                                <td class="text-right">{{ form_widget(form.goodEndurance) }}</td>
+                                <td class="text-right">{{ form_widget(form.goodMuscularStrength) }}</td>
+                                <td class="text-right">{{ form_widget(form.goodFlexibility) }}</td>
+                                <td class="text-right">{{ form_widget(form.lowLevelOfStress) }}</td>
+                                <td class="text-right">{{ form_widget(form.goodSleepQuality) }}</td>
+                                <td class="text-right">{{ form_widget(form.healthyRelationships) }}</td>
+                                <td class="text-right">{{ form_widget(form.emotionalWellBeing) }}</td>
+                                <td class="text-right">{{ form_widget(form.regularConsumptionOfFruitsAndVegetables) }}</td>
+                                <td class="text-right">{{ form_widget(form.adequateProteinIntake) }}</td>
+                                <td class="text-right">{{ form_widget(form.adequateFiberIntake) }}</td>
+                                <td class="text-right">{{ form_widget(form.adequateHydratation) }}</td>
+                                <td class="text-right">{{ form_widget(form.nonSmoker) }}</td>
+                                <td class="text-right">{{ form_widget(form.moderateOrNoAlcoholConsumption) }}</td>
+                                <td class="text-right">{{ form_widget(form.goodStressManagement) }}</td>
+                                <td class="text-right">{{ form_widget(form.sufficientAndQualitySleep) }}</td>
+                                <td class="text-right">{{ form_widget(form.regularMedicalExaminations) }}</td>
+                                <td class="text-right">{{ form_widget(form.UpToDateVaccinations) }}</td>
+                                <td class="text-right">{{ form_widget(form.absenceOfUntreatedChronicHealthIssues) }}</td>
+                                <td class="text-right">{{ form_widget(form.maintainingHealthyWeight) }}</td>
+                                <td class="text-right">
+                                    <button class="mt-2 font-comfortaa font-bold underline underline-offset-[6px]">{{ button_label|default('Save') }}</button>
+                                </td>							
+                            </tr>
+                                {{ form_end(form) }}
+                        </tbody>
+                    </table>
+                </div>
+			</div>
+        </div>
+    </div>
 {% endblock %}
