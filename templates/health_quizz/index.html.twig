@@ -4,121 +4,119 @@
 {% endblock %}
 
 {% block body %}
-
-	<div class="pt-20">
-		<h1>Health Quizz</h1>
-
-		<div>
-			<h2>Your Health Score: {{ first_health_score }}</h2>
-		</div>
-		
-        <table class="flex">
-			<thead>
-				<tr class="flex flex-col">
-					<th>Id</th>
-					<th>Physical Activity</th>
-					<th>Good Endurance</th>
-					<th>Good Muscular Strength</th>
-					<th>Good Flexibility</th>
-					<th>Low Level Of Stress</th>
-					<th>Good Sleep Quality</th>
-					<th>Healthy Relationships</th>
-					<th>Emotional Well Being</th>
-					<th>Regular Consumption Of Fruits And Vegetables</th>
-					<th>Adequate Protein Intake</th>
-					<th>Adequate Fiber Intake</th>
-					<th>Adequate Hydratation</th>
-					<th>Non Smoker</th>
-					<th>Moderate Or No Alcohol Consumption</th>
-					<th>Good Stress Management</th>
-					<th>Sufficient And Quality Sleep</th>
-					<th>Regular Medical Examinations</th>
-					<th>Up To Date Vaccinations</th>
-					<th>Absence Of Untreated Chronic Health Issues</th>
-					<th>Maintaining Healthy Weight</th>
-					<th>actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for health_quizz in health_quizzs %}
-					<tr class="flex flex-col">
-						<td>{{ health_quizz.id }}</td>
-						<td>{{ health_quizz.physicalActivity ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.goodEndurance ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.goodMuscularStrength ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.goodFlexibility ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.lowLevelOfStress ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.goodSleepQuality ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.healthyRelationships ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.emotionalWellBeing ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.regularConsumptionOfFruitsAndVegetables ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.adequateProteinIntake ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.adequateFiberIntake ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.adequateHydratation ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.nonSmoker ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.moderateOrNoAlcoholConsumption ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.goodStressManagement ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.sufficientAndQualitySleep ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.regularMedicalExaminations ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.UpToDateVaccinations ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.absenceOfUntreatedChronicHealthIssues ? 'Yes' : 'No' }}</td>
-						<td>{{ health_quizz.maintainingHealthyWeight ? 'Yes' : 'No' }}</td>
-						<td>
-							<a href="{{ path('app_health_quizz_show', {'id': health_quizz.id}) }}">show</a>
-							<a href="{{ path('app_health_quizz_edit', {'id': health_quizz.id}) }}">edit</a>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="22">no records found</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-
-		<a href="{{ path('app_health_quizz_new') }}">Create new</a>
-	</div>
-<div id="chart"></div>
+	<div class="flex h-screen">
+		<div class="w-full h-full bg-emerald-700 bg-opacity-50 flex justify-center pt-20">
+			<div>
+				<h1 class="font-bold text-xl font-comfortaa">Health Quizz</h1>
+				<div class="flex flex-col md:flex-row">
+					<div class="w-full md:w-auto">
+						<table class="flex my-10">
+							<thead>
+								<tr class="flex flex-col">
+									<th class="text-left">Physical Activity</th>
+									<th class="text-left">Good Endurance</th>
+									<th class="text-left">Good Muscular Strength</th>
+									<th class="text-left">Good Flexibility</th>
+									<th class="text-left">Low Level Of Stress</th>
+									<th class="text-left">Good Sleep Quality</th>
+									<th class="text-left">Healthy Relationships</th>
+									<th class="text-left">Emotional Well Being</th>
+									<th class="text-left">Regular Consumption Of Fruits</th>
+									<th class="text-left">Adequate Protein Intake</th>
+									<th class="text-left">Adequate Fiber Intake</th>
+									<th class="text-left">Adequate Hydratation</th>
+									<th class="text-left">Non Smoker</th>
+									<th class="text-left">Moderate Or No Alcohol Consumption</th>
+									<th class="text-left">Good Stress Management</th>
+									<th class="text-left">Sufficient And Quality Sleep</th>
+									<th class="text-left">Regular Medical Examinations</th>
+									<th class="text-left">Up To Date Vaccinations</th>
+									<th class="text-left">Absence Of Untreated Chronic Health</th>
+									<th class="text-left">Maintaining Healthy Weight</th>
+									<th class="text-left"></th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for health_quizz in health_quizzs %}
+									<tr class="flex flex-col">
+										<td class="text-right ml-10">{{ health_quizz.physicalActivity ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.goodEndurance ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.goodMuscularStrength ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.goodFlexibility ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.lowLevelOfStress ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.goodSleepQuality ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.healthyRelationships ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.emotionalWellBeing ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.regularConsumptionOfFruitsAndVegetables ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.adequateProteinIntake ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.adequateFiberIntake ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.adequateHydratation ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.nonSmoker ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.moderateOrNoAlcoholConsumption ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.goodStressManagement ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.sufficientAndQualitySleep ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.regularMedicalExaminations ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.UpToDateVaccinations ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.absenceOfUntreatedChronicHealthIssues ? 'Yes' : 'No' }}</td>
+										<td class="text-right">{{ health_quizz.maintainingHealthyWeight ? 'Yes' : 'No' }}</td>
+										<td class="text-right">
+											<a class="font-comfortaa font-bold underline underline-offset-[6px]" href="{{ path('app_health_quizz_edit', {'id': health_quizz.id}) }}">edit</a>
+										</td>
+									</tr>
+									{# <a href="{{ path('app_health_quizz_show', {'id': health_quizz.id}) }}">show</a> #}
+								{% else %}
+									<tr>
+										<td colspan="22">
+											<a class="mt-2 font-comfortaa font-bold underline underline-offset-[6px] mr-4" href="{{ path('app_health_quizz_new') }}">Create</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					<div class="w-full md:w-auto flex flex-col justify-center items-center">
+                        <h2 class="font-comfortaa text-lg font-bold">Your Health Score :
+                            {{ first_health_score }} %</h2>
+						<div class="font-comfortaa" id="chart"></div>
+					</div>
+				</div>
+			</div>
+        </div>
     </div>
-</div>
-    <script>
-        var width = 250
-        var height = 250
-        var margin = 1
+			<script>
+				var width = 350
+                var height = 350
+                var margin = 1
 
-        var radius = Math.min(width, height) / 3 - margin
+                var radius = Math.min(width, height) / 3 - margin
 
-        var svg = d3.select('#chart')
-          .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-          .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                var svg = d3.select('#chart').append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-        var data = {a: {{ first_health_score }}, b: {{ 100 - first_health_score }}}
+                var data = {
+                a: {{ first_health_score }},
+                b: {{ 100 - first_health_score }}
+                }
 
-        var color = d3.scaleOrdinal()
-          .domain(data)
-          .range(d3.schemeDark2);
+                var color = d3.scaleOrdinal().domain(data).range(["#d0b183", "#81bbab"]);
 
-        var pie = d3.pie()
-          .value(function(d) {return d.value; })
-        var data_ready = pie(d3.entries(data))
+                var pie = d3.pie().value(function (d) {
+                return d.value;
+                })
+                var data_ready = pie(d3.entries(data))
 
-        svg
-          .selectAll('whatever')
-          .data(data_ready)
-          .enter()
-          .append('path')
-          .attr('d', d3.arc()
-            .innerRadius(60)         // This is the size of the donut hole
-            .outerRadius(radius)
-          )
-          .attr('fill', function(d){ return(color(d.data.key)) })
-          .attr("stroke", "white")
-          .style("stroke-width", "2px")
-          .style("opacity", 0.7)
-    </script>
-    
+                svg.selectAll('whatever').data(data_ready).enter().append('path').attr('d', d3.arc().innerRadius(80)
+                .outerRadius(radius)).attr('fill', function (d) {
+                return(color(d.data.key))
+                }).attr("stroke", "white").style("stroke-width", "2px").style("opacity", 0.7)
 
-{% endblock %}
+                var text = svg.append("text")
+                    .attr("text-anchor", "middle")
+                    .attr("dy", ".35em")
+                    .attr("font-size", "24px")
+                    .attr("font-family", "Arial")
+                    .attr("fill", "black")
+                    .text("{{ first_health_score }}%")
+                    .style("font-comfortaa");
+			</script>
+
+		{% endblock %}
