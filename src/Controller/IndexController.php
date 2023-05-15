@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\UserInformationRepository;
 use \Symfony\Bundle\SecurityBundle\Security;
+use App\Repository\HealthQuizzRepository;
 
 
 class IndexController extends AbstractController 
@@ -25,7 +26,7 @@ class IndexController extends AbstractController
     }
 
     #[Route('/dashboard', name: 'dashboard')]
-    public function dashboard(UserInformationRepository $userInformationRepository): Response
+    public function dashboard(UserInformationRepository $userInformationRepository, HealthQuizzRepository $healthQuizzRepository): Response
     {
         $user = $this->security->getUser();
 
@@ -35,8 +36,17 @@ class IndexController extends AbstractController
 
         $userInformations = $userInformationRepository->findBy(['user' => $user]);
 
+        $firstHealthQuizz = $healthQuizzRepository->findOneBy([]);
+        $firstHealthScore = null;
+        
+        if ($firstHealthQuizz) {
+            $firstHealthScore = $firstHealthQuizz->getHealthScore();
+        }
+
         return $this->render('dashboard.html.twig', [
             'user_informations' => $userInformations,
+            'first_health_score' => $firstHealthScore,
+            'health_quizzs' => $healthQuizzRepository->findAll(),
         ]);
     }
 }
