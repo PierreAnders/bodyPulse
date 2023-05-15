@@ -1,11 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New UserInformation{% endblock %}
+{% block title %}Informations{% endblock %}
 
 {% block body %}
-    <h1>Create new UserInformation</h1>
-
-    {{ include('user_information/_form.html.twig') }}
-
-    <a href="{{ path('app_user_information_index') }}">back to list</a>
+<div class="flex justify-center items-center h-screen">
+  <div class="w-2/3 h-2/3 bg-emerald-700 bg-opacity-50 flex justify-center items-center">
+    {{ form_start(form, {'attr': {'class': 'p-6'}}) }}
+      <h1 class="h3 mb-3 text-xl font-bold font-comfortaa">Informations</h1>
+        {{ form_row(form.firstName, {'attr': {'class': 'rounded mb-4', 'placeholder': 'First Name'}, 'label': false}) }}
+        {{ form_row(form.lastName, {'attr': {'class': 'rounded mb-4', 'placeholder': 'Last Name'}, 'label': false}) }}
+        {{ form_widget(form.gender, {'attr': {'class': 'rounded mb-4 px-2 py-2 text-gray-500', 'placeholder': 'Gender'}}) }}
+        {{ form_widget(form.dateOfBirth, {'attr': {'class': 'rounded mb-4 mt-2 text-gray-500', 'placeholder': 'Date of Birth'}}) }}
+        {{ form_row(form.height, {'attr': {'class': 'rounded mb-4', 'placeholder': 'Height'}, 'label': false}) }}
+        {{ form_row(form.weight, {'attr': {'class': 'rounded mb-4', 'placeholder': 'Weight'}, 'label': false}) }}
+        <button type="submit" class="mt-2 font-comfortaa font-bold underline underline-offset-[6px]">
+            Save
+        </button>
+    {{ form_end(form) }}
+  </div>
+</div>
+<a href="{{ path('app_user_information_index') }}">back to list</a>
 {% endblock %}

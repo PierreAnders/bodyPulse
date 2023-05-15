@@ -3,15 +3,18 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="flex justify-center items-center h-screen">
+  <div class="w-2/3 h-2/3 bg-yellow-700 bg-opacity-50 flex justify-center items-center">
+    {{ form_start(registrationForm, {'attr': {'class': 'p-6'}}) }}
+      <h1 class="h3 mb-3 text-xl font-bold font-comfortaa">Register</h1>
+        {{ form_row(registrationForm.email, {'attr': {'class': 'rounded mb-4', 'placeholder': 'Email', 'autocomplete': 'email', 'autofocus': 'true'}, 'label': false}) }}
+        {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'rounded mb-4', 'placeholder': 'Password', 'autocomplete': 'new-password'}, 'label': false}) }}
+        {{ form_row(registrationForm.agreeTerms, {'label_attr': {'class': 'inline-flex items-center'}}) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="mt-2 font-comfortaa font-bold underline underline-offset-[6px]">
+            Register
+        </button>
     {{ form_end(registrationForm) }}
+  </div>
+</div>
 {% endblock %}
