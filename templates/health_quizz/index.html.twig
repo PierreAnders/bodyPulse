@@ -1,79 +1,124 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Health Quizz{% endblock %}
+{% block title %}Health Quizz
+{% endblock %}
 
 {% block body %}
-<div class="pt-20">
-    <h1>Health Quizz</h1>
-    
-   <div>
-    <h2>Your Health Score: {{ first_health_score }}</h2>
+
+	<div class="pt-20">
+		<h1>Health Quizz</h1>
+
+		<div>
+			<h2>Your Health Score: {{ first_health_score }}</h2>
+		</div>
+		
+        <table class="flex">
+			<thead>
+				<tr class="flex flex-col">
+					<th>Id</th>
+					<th>Physical Activity</th>
+					<th>Good Endurance</th>
+					<th>Good Muscular Strength</th>
+					<th>Good Flexibility</th>
+					<th>Low Level Of Stress</th>
+					<th>Good Sleep Quality</th>
+					<th>Healthy Relationships</th>
+					<th>Emotional Well Being</th>
+					<th>Regular Consumption Of Fruits And Vegetables</th>
+					<th>Adequate Protein Intake</th>
+					<th>Adequate Fiber Intake</th>
+					<th>Adequate Hydratation</th>
+					<th>Non Smoker</th>
+					<th>Moderate Or No Alcohol Consumption</th>
+					<th>Good Stress Management</th>
+					<th>Sufficient And Quality Sleep</th>
+					<th>Regular Medical Examinations</th>
+					<th>Up To Date Vaccinations</th>
+					<th>Absence Of Untreated Chronic Health Issues</th>
+					<th>Maintaining Healthy Weight</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for health_quizz in health_quizzs %}
+					<tr class="flex flex-col">
+						<td>{{ health_quizz.id }}</td>
+						<td>{{ health_quizz.physicalActivity ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.goodEndurance ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.goodMuscularStrength ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.goodFlexibility ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.lowLevelOfStress ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.goodSleepQuality ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.healthyRelationships ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.emotionalWellBeing ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.regularConsumptionOfFruitsAndVegetables ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.adequateProteinIntake ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.adequateFiberIntake ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.adequateHydratation ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.nonSmoker ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.moderateOrNoAlcoholConsumption ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.goodStressManagement ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.sufficientAndQualitySleep ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.regularMedicalExaminations ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.UpToDateVaccinations ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.absenceOfUntreatedChronicHealthIssues ? 'Yes' : 'No' }}</td>
+						<td>{{ health_quizz.maintainingHealthyWeight ? 'Yes' : 'No' }}</td>
+						<td>
+							<a href="{{ path('app_health_quizz_show', {'id': health_quizz.id}) }}">show</a>
+							<a href="{{ path('app_health_quizz_edit', {'id': health_quizz.id}) }}">edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="22">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_health_quizz_new') }}">Create new</a>
+	</div>
+<div id="chart"></div>
     </div>
-
-    <table class="flex">
-        <thead>
-            <tr class="flex flex-col">
-                <th>Id</th>
-                <th>Physical Activity</th>
-                <th>Good Endurance</th>
-                <th>Good Muscular Strength</th>
-                <th>Good Flexibility</th>
-                <th>Low Level Of Stress</th>
-                <th>Good Sleep Quality</th>
-                <th>Healthy Relationships</th>
-                <th>Emotional Well Being</th>
-                <th>Regular Consumption Of Fruits And Vegetables</th>
-                <th>Adequate Protein Intake</th>
-                <th>Adequate Fiber Intake</th>
-                <th>Adequate Hydratation</th>
-                <th>Non Smoker</th>
-                <th>Moderate Or No Alcohol Consumption</th>
-                <th>Good Stress Management</th>
-                <th>Sufficient And Quality Sleep</th>
-                <th>Regular Medical Examinations</th>
-                <th>Up To Date Vaccinations</th>
-                <th>Absence Of Untreated Chronic Health Issues</th>
-                <th>Maintaining Healthy Weight</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody >
-        {% for health_quizz in health_quizzs %}
-            <tr class="flex flex-col">
-                <td>{{ health_quizz.id }}</td>
-                <td>{{ health_quizz.physicalActivity ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.goodEndurance ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.goodMuscularStrength ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.goodFlexibility ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.lowLevelOfStress ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.goodSleepQuality ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.healthyRelationships ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.emotionalWellBeing ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.regularConsumptionOfFruitsAndVegetables ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.adequateProteinIntake ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.adequateFiberIntake ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.adequateHydratation ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.nonSmoker ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.moderateOrNoAlcoholConsumption ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.goodStressManagement ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.sufficientAndQualitySleep ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.regularMedicalExaminations ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.UpToDateVaccinations ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.absenceOfUntreatedChronicHealthIssues ? 'Yes' : 'No' }}</td>
-                <td>{{ health_quizz.maintainingHealthyWeight ? 'Yes' : 'No' }}</td>
-                <td>
-                <a href="{{ path('app_health_quizz_show', {'id': health_quizz.id}) }}">show</a>
-                <a href="{{ path('app_health_quizz_edit', {'id': health_quizz.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="22">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_health_quizz_new') }}">Create new</a>
 </div>
+    <script>
+        var width = 250
+        var height = 250
+        var margin = 1
+
+        var radius = Math.min(width, height) / 3 - margin
+
+        var svg = d3.select('#chart')
+          .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+          .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var data = {a: {{ first_health_score }}, b: {{ 100 - first_health_score }}}
+
+        var color = d3.scaleOrdinal()
+          .domain(data)
+          .range(d3.schemeDark2);
+
+        var pie = d3.pie()
+          .value(function(d) {return d.value; })
+        var data_ready = pie(d3.entries(data))
+
+        svg
+          .selectAll('whatever')
+          .data(data_ready)
+          .enter()
+          .append('path')
+          .attr('d', d3.arc()
+            .innerRadius(60)         // This is the size of the donut hole
+            .outerRadius(radius)
+          )
+          .attr('fill', function(d){ return(color(d.data.key)) })
+          .attr("stroke", "white")
+          .style("stroke-width", "2px")
+          .style("opacity", 0.7)
+    </script>
+    
+
 {% endblock %}
