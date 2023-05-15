@@ -1,70 +1,177 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}dashboard{% endblock %}
+{% block title %}dashboard
+{% endblock %}
 
 {% block body %}
 
-
-
-<div class="pt-20 flex items-center justify-center">
-    <img src="{{ asset('img/female.svg') }}" alt="Description">
-    <div>
-        {% for user_information in user_informations %}
-            <div class="p-8">
-                <div class="pt-2"><span class="font-bold text-xl font-comfortaa"> {{ user_information.firstName }} </span> <span class="font-bold text-xl font-comfortaa">{{ user_information.lastName }} </span></div>
-                <div class="pt-2"><span class="font-bold text-xl font-comfortaa">{{ user_information.height }}m / </span><span class="font-bold text-xl font-comfortaa">{{ user_information.weight }}kg </span></div>
-                <div class="pt-2"><span class="font-bold text-xl font-comfortaa">BMI {{ user_information.bmi|round(1) }} </span></div>
-                <div class="mt-2">
-                    {# <a href="{{ path('app_user_information_show', {'id': user_information.id}) }}" class="text-blue-500">show</a> #}
-                    {# <a href="{{ path('app_user_information_edit', {'id': user_information.id}) }}" class="font-bold text-lg font-comfortaa underline-offset-4">edit</a> #}
-                </div>
-            </div>
-        {% else %}
-            <div class="border p-4">
-                <div class="font-bold">No records found</div>
-            </div>
-              
-        {% endfor %}
-        
-<div id="chart"></div>
-    </div>
+	<div class="pt-20 flex items-center justify-center">
+		<div class="ml-8">
+			<img src="{{ asset('img/female.svg') }}" alt="Description">
+		</div>
+		<div>
+			<div class="flex flex-row flex-col items-center justify-center">
+				{% for user_information in user_informations %}
+					<div class="p-8">
+						<div class="pt-2">
+							<span class="font-bold text-xl font-comfortaa">
+								{{ user_information.firstName }}
+							</span>
+							<span class="font-bold text-xl font-comfortaa">{{ user_information.lastName }}
+							</span>
+						</div>
+						<div class="pt-2">
+							<span class="font-bold text-xl font-comfortaa">{{ user_information.height }}m /
+							</span>
+							<span class="font-bold text-xl font-comfortaa">{{ user_information.weight }}kg
+							</span>
+						</div>
+						<div class="pt-2">
+							<span class="font-bold text-xl font-comfortaa">BMI
+								{{ user_information.bmi|round(1) }}
+							</span>
+						</div>
+					</div>
+				{% else %}
+					<div class="border p-4">
+						<div class="font-bold">No records found</div>
+					</div>
+				</div>
+			{% endfor %}
+			<div class="font-comfortaa" id="chart"></div>
+		</div>
+	</div>
 </div>
-    <script>
-        var width = 250
-        var height = 250
-        var margin = 1
+<div class="pt-20 flex flex-col text-left items-center justify-center mb-20">
+	<div class="font-bold text-cyan-700 text-xl font-comfortaa mb-6">Your health score is
+		{{ first_health_score }}%</div>
+	{% for health_quizz in health_quizzs %}
+		{% if  health_quizz.physicalActivity == false %}
+			<div class="text-left">
+				Make more physical activity
+			</div>
+		{% endif %}
+		{% if  health_quizz.goodEndurance == false %}
+			<div>
+				Make an activity to enhance your endurance (ex: running)</div>
+		{% endif %}
+		{% if  health_quizz.goodMuscularStrength == false %}
+			<div>
+				Make a physical activity to enhance your strength (ex:climbing)</div>
+		{% endif %}
+		{% if  health_quizz.goodFlexibility == false %}
+			<div>
+				Make a physical activity to enhance your flexibility (ex: yoga)</div>
+		{% endif %}
+		{% if  health_quizz.lowLevelOfStress == false %}
+			<div>
+				Try an activity to get low stress (ex: meditation)</div>
+		{% endif %}
+		{% if  health_quizz.goodSleepQuality == false %}
+			<div>
+				Establish a consistent sleep schedule
+			</div>
+		{% endif %}
+		{% if  health_quizz.healthyRelationships == false %}
+			<div>
+				Establish a consistent sleep schedule
+			</div>
+		{% endif %}
+		{% if  health_quizz.healthyRelationships == false %}
+			<div>
+				Cultivate effective communication skills
+			</div>
+		{% endif %}
+		{% if  health_quizz.emotionalWellBeing == false %}
+			<div>
+				Practice self-compassion
+			</div>
+		{% endif %}
+		{% if  health_quizz.regularConsumptionOfFruitsAndVegetables == false %}
+			<div>
+				Eat more fruits
+			</div>
+		{% endif %}
+		{% if  health_quizz.adequateProteinIntake == false %}
+			<div>
+				Include a variety of protein sources in your die
+			</div>
+		{% endif %}
+		{% if  health_quizz.adequateFiberIntake == false %}
+			<div>
+				Include a variety of fiber sources in your die
+			</div>
+		{% endif %}
+		{% if  health_quizz.adequateHydratation == false %}
+			<div>
+				Drink more water</div>
+		{% endif %}
+		{% if  health_quizz.nonSmoker == false %}
+			<div>
+				Reduce and stop your cigarette consumption
+			</div>
+		{% endif %}
+		{% if  health_quizz.moderateOrNoAlcoholConsumption == false %}
+			<div>
+				Moderate or stop your alcohol consumption
+			</div>
+		{% endif %}
+		{% if  health_quizz.goodStressManagement == false %}
+			<div>
+				Prioritize self-care
+			</div>
+		{% endif %}
+		{% if  health_quizz.sufficientAndQualitySleep == false %}
+			<div>
+				Give more time to your sleep
+			</div>
+		{% endif %}
+		{% if  health_quizz.regularMedicalExaminations == false %}
+			<div>
+				Get health checkups more regularly
+			</div>
+		{% endif %}
+		{% if  health_quizz.UpToDateVaccinations == false %}
+			<div>
+				Be up to date with your vaccinations
+			</div>
+		{% endif %}
+		{% if  health_quizz.absenceOfUntreatedChronicHealthIssues == false %}
+			<div>
+				Treat your chronic health problems
+			</div>
+		{% endif %}
+		{% if  health_quizz.maintainingHealthyWeight == false %}
+			<div>
+				Maintain a healthy weight
+			</div>
+		{% endif %}
+	{% endfor %}
+</div>
+<script>
+var width = 350
+var height = 350
+var margin = 1
 
-        var radius = Math.min(width, height) / 3 - margin
+var radius = Math.min(width, height) / 3 - margin
 
-        var svg = d3.select('#chart')
-          .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-          .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+var svg = d3.select('#chart').append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-        var data = {a: 9, b: 20}
+var data = {
+a: {{ first_health_score }},
+b: {{ 100 - first_health_score }}
+}
 
-        var color = d3.scaleOrdinal()
-          .domain(data)
-          .range(d3.schemeDark2);
+var color = d3.scaleOrdinal().domain(data).range(["#86b9c7", "#d0b183"]);
 
-        var pie = d3.pie()
-          .value(function(d) {return d.value; })
-        var data_ready = pie(d3.entries(data))
+var pie = d3.pie().value(function (d) {
+return d.value;
+})
+var data_ready = pie(d3.entries(data))
 
-        svg
-          .selectAll('whatever')
-          .data(data_ready)
-          .enter()
-          .append('path')
-          .attr('d', d3.arc()
-            .innerRadius(60)         // This is the size of the donut hole
-            .outerRadius(radius)
-          )
-          .attr('fill', function(d){ return(color(d.data.key)) })
-          .attr("stroke", "white")
-          .style("stroke-width", "2px")
-          .style("opacity", 0.7)
-    </script>
-{% endblock %}
+svg.selectAll('whatever').data(data_ready).enter().append('path').attr('d', d3.arc().innerRadius(80).outerRadius(radius)).attr('fill', function (d) {
+return(color(d.data.key))
+}).attr("stroke", "white").style("stroke-width", "2px").style("opacity", 0.7)
+
+var text = svg.append("text").attr("text-anchor", "middle").attr("dy", ".35em").attr("font-size", "24px").attr("font-family", "Arial").attr("fill", "black").text("{{ first_health_score }}%").style("font-comfortaa");
+</script>{% endblock %}
