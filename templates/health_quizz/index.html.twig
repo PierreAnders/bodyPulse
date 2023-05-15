@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="flex h-screen">
+	<div class="flex md:h-screen">
 		<div class="w-full h-full bg-emerald-700 bg-opacity-50 flex justify-center pt-20">
 			<div>
 				<h1 class="font-bold text-xl font-comfortaa">Health Quizz</h1>
@@ -74,15 +74,17 @@
 							</tbody>
 						</table>
 					</div>
+					{% if first_health_score %}
 					<div class="w-full md:w-auto flex flex-col justify-center items-center">
                         <h2 class="font-comfortaa text-lg font-bold">Your Health Score :
                             {{ first_health_score }} %</h2>
 						<div class="font-comfortaa" id="chart"></div>
 					</div>
+					{% endif %}
 				</div>
 			</div>
         </div>
-    </div>
+    
 			<script>
 				var width = 350
                 var height = 350
@@ -118,5 +120,6 @@
                     .text("{{ first_health_score }}%")
                     .style("font-comfortaa");
 			</script>
+			</div>
 
 		{% endblock %}
