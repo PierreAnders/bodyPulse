@@ -9,30 +9,56 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use \Symfony\Bundle\SecurityBundle\Security;
+
 
 #[Route('/health/quizz')]
 class HealthQuizzController extends AbstractController
 {
-    #[Route('/', name: 'app_health_quizz_index', methods: ['GET'])]
-    public function index(HealthQuizzRepository $healthQuizzRepository): Response
-{
-    $firstHealthQuizz = $healthQuizzRepository->findOneBy([]);
-    $firstHealthScore = null;
-    
-    if ($firstHealthQuizz) {
-        $firstHealthScore = $firstHealthQuizz->getHealthScore();
+
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
     }
 
-    return $this->render('health_quizz/index.html.twig', [
-        'health_quizzs' => $healthQuizzRepository->findAll(),
-        'first_health_score' => $firstHealthScore,
-    ]);
-}
+    #[Route('/', name: 'app_health_quizz_index', methods: ['GET'])]
+    public function index(HealthQuizzRepository $healthQuizzRepository): Response
+    {
+
+        $user = $this->security->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $firstHealthQuizz = $healthQuizzRepository->findBy(['user' => $user]);
+
+        $firstHealthScore = null;
+        if (!empty($firstHealthQuizz)) {
+            $firstHealthScore = $firstHealthQuizz[0]->getHealthScore();
+        }
+
+        return $this->render('health_quizz/index.html.twig', [
+            'health_quizzs' => $firstHealthQuizz,
+            'first_health_score' => $firstHealthScore,
+        ]);
+    }
 
     #[Route('/new', name: 'app_health_quizz_new', methods: ['GET', 'POST'])]
     public function new(Request $request, HealthQuizzRepository $healthQuizzRepository): Response
     {
+
+        $user = $this->security->getUser();
+
+        if (!$user) {
+            throw $this->createAccessDeniedException('User must be logged in.');
+        }
+
         $healthQuizz = new HealthQuizz();
+        $healthQuizz->setUser($user);
+
         $form = $this->createForm(HealthQuizzType::class, $healthQuizz);
         $form->handleRequest($request);
 
@@ -77,7 +103,7 @@ class HealthQuizzController extends AbstractController
     #[Route('/{id}', name: 'app_health_quizz_delete', methods: ['POST'])]
     public function delete(Request $request, HealthQuizz $healthQuizz, HealthQuizzRepository $healthQuizzRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$healthQuizz->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $healthQuizz->getId(), $request->request->get('_token'))) {
             $healthQuizzRepository->remove($healthQuizz, true);
         }
 

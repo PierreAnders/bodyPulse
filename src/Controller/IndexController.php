@@ -36,17 +36,17 @@ class IndexController extends AbstractController
 
         $userInformations = $userInformationRepository->findBy(['user' => $user]);
 
-        $firstHealthQuizz = $healthQuizzRepository->findOneBy([]);
+        $firstHealthQuizz = $healthQuizzRepository->findBy(['user' => $user]);
+
         $firstHealthScore = null;
-        
-        if ($firstHealthQuizz) {
-            $firstHealthScore = $firstHealthQuizz->getHealthScore();
+        if (!empty($firstHealthQuizz)) {
+            $firstHealthScore = $firstHealthQuizz[0]->getHealthScore();
         }
 
         return $this->render('dashboard.html.twig', [
             'user_informations' => $userInformations,
             'first_health_score' => $firstHealthScore,
-            'health_quizzs' => $healthQuizzRepository->findAll(),
+            'health_quizzs' => $firstHealthQuizz,
         ]);
     }
 }
