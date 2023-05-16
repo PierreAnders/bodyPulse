@@ -10,42 +10,42 @@
 	<div id="menu" class="hidden absolute w-full bg-white shadow-md">
 		<ul class="container mx-auto px-4 py-2 flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4">
 			<li>
-				<a href="{{ path('index') }}" class="text-gray-700 hover:text-blue-600">home</a>
+				<a href="{{ path('index') }}" class="font-semibold hover:text-gray-600">Home</a>
 			</li>
 			{% if app.user %}
 				<li>
-					<a href="{{ path('dashboard')}}" class="text-gray-700 hover:text-blue-600">dashboard</a>
+					<a href="{{ path('dashboard')}}" class="font-semibold hover:text-gray-600">Dashboard</a>
 				</li>
 				<li>
-					<a href="{{ path('app_user_information_index')}}" class="text-gray-700 hover:text-blue-600">profile</a>
+					<a href="{{ path('app_user_information_index')}}" class="font-semibold hover:text-gray-600">Profile</a>
 				</li>
 				<li>
-					<a href="{{ path('app_health_quizz_index')}}" class="text-gray-700 hover:text-blue-600">health quizz</a>
+					<a href="{{ path('app_health_quizz_index')}}" class="font-semibold hover:text-gray-600">Health quizz</a>
 				</li>
+				{# <li>
+					<a href="#" class="font-semibold hover:text-gray-600>medical records</a>
+				</li> #}
 				<li>
-					<a href="#" class="text-gray-700 hover:text-blue-600">medical records</a>
-				</li>
-				<li>
-					<a href="{{ path('app_logout') }}" class="text-gray-700 hover:text-blue-600">logout</a>
+					<a href="{{ path('app_logout') }}" class="font-semibold hover:text-gray-600">Logout</a>
 				</li>
 			{% else %}
 				<li>
-					<a href="{{ path('app_login') }}" class="text-gray-700 hover:text-blue-600">dashboard</a>
+					<a href="{{ path('app_login') }}" class="font-semibold hover:text-gray-600">Dashboard</a>
 				</li>
 				<li>
-					<a href="{{ path('app_login') }}" class="text-gray-700 hover:text-blue-600">profile</a>
+					<a href="{{ path('app_login') }}" class="font-semibold hover:text-gray-600">Profile</a>
 				</li>
 				<li>
-					<a href="{{ path('app_login') }}" class="text-gray-700 hover:text-blue-600">health quizz</a>
+					<a href="{{ path('app_login') }}" class="font-semibold hover:text-gray-600">Health quizz</a>
+				</li>
+				{# <li>
+					<a href="{{ path('app_login') }}" class="font-semibold hover:text-gray-600">medical records</a>
+				</li> #}
+				<li>
+					<a href="{{ path('app_login') }}" class="font-semibold hover:text-gray-600">Login</a>
 				</li>
 				<li>
-					<a href="{{ path('app_login') }}" class="text-gray-700 hover:text-blue-600">medical records</a>
-				</li>
-				<li>
-					<a href="{{ path('app_login') }}" class="text-gray-700 hover:text-blue-600">login</a>
-				</li>
-				<li>
-					<a href="{{ path('app_register') }}" class="text-gray-700 hover:text-blue-600">sign in</a>
+					<a href="{{ path('app_register') }}" class="font-semibold hover:text-gray-600">Sign In</a>
 				</li>
 			{% endif %}
 		</ul>

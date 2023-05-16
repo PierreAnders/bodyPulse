@@ -8,9 +8,10 @@
 		<div class="w-2/3 h-2/3 bg-emerald-700 bg-opacity-50 flex justify-center items-center">
 			{# <img src="{{ asset('img/female.svg') }}" alt="Description"> #}
 			<div>
+			<h1 class="p-8 text-2xl font-bold font-comfortaa">Profile</h1>
 				{% for user_information in user_informations %}
-					<div class="p-8">
-						<div class="pt-2">
+					<div class="pl-8">
+						<div class="">
 							<span class="text-xl font-comfortaa">first name :</span>
 							<span class="font-bold text-xl font-comfortaa">
 								{{ user_information.firstName }}
@@ -47,20 +48,16 @@
 							</span>
 						</div>
 						<div
-							class="mt-2">
+							class="mt-4">
 							{# <a href="{{ path('app_user_information_show', {'id': user_information.id}) }}" class="text-blue-500">show</a> #}
-							<a href="{{ path('app_user_information_edit', {'id': user_information.id}) }}" class="font-bold text-lg font-comfortaa underline-offset-4">edit</a>
+							<a href="{{ path('app_user_information_edit', {'id': user_information.id}) }}" class="font-bold text-lg font-comfortaa underline-offset-4">Edit</a>
 						</div>
-					</div>
-				{% else %}
-					<div class="border p-4">
-						<div class="font-bold">No records found</div>
 					</div>
 				{% endfor %}
 			</div>
 
 			{% if user_informations|length == 0 %}
-				<a href="{{ path('app_user_information_new') }}" class="text-blue-500 mt-4">Create new</a>
+				<a href="{{ path('app_user_information_new') }}" class="font-comfortaa font-bold underline underline-offset-[6px] hover:text-gray-600 duration-300">Create Profile</a>
 			{% endif %}
 		</div>
 	</div>

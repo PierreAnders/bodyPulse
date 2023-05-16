@@ -7,7 +7,7 @@
 	<div class="flex md:h-screen">
 		<div class="w-full h-full bg-emerald-700 bg-opacity-50 flex justify-center pt-20">
 			<div>
-				<h1 class="font-bold text-xl font-comfortaa">Health Quizz</h1>
+				<h1 class="font-bold text-2xl font-comfortaa">Health Quizz</h1>
 				<div class="flex flex-col md:flex-row">
 					<div class="w-full md:w-auto">
 						<table class="flex my-10">
@@ -60,14 +60,14 @@
 										<td class="text-right">{{ health_quizz.absenceOfUntreatedChronicHealthIssues ? 'Yes' : 'No' }}</td>
 										<td class="text-right">{{ health_quizz.maintainingHealthyWeight ? 'Yes' : 'No' }}</td>
 										<td class="text-right">
-											<a class="font-comfortaa font-bold underline underline-offset-[6px]" href="{{ path('app_health_quizz_edit', {'id': health_quizz.id}) }}">edit</a>
+											<a class="font-comfortaa font-bold underline underline-offset-[6px] hover:text-gray-600 duration-300" href="{{ path('app_health_quizz_edit', {'id': health_quizz.id}) }}">Edit</a>
 										</td>
 									</tr>
 									{# <a href="{{ path('app_health_quizz_show', {'id': health_quizz.id}) }}">show</a> #}
 								{% else %}
 									<tr>
 										<td colspan="22">
-											<a class="mt-2 font-comfortaa font-bold underline underline-offset-[6px] mr-4" href="{{ path('app_health_quizz_new') }}">Create</a>
+											<a class="mt-2 font-comfortaa font-bold underline underline-offset-[6px] mr-4 hover:text-gray-600 duration-300" href="{{ path('app_health_quizz_new') }}">Answer Health Quizz</a>
 										</td>
 									</tr>
 								{% endfor %}
@@ -76,7 +76,7 @@
 					</div>
 					{% if first_health_score %}
 					<div class="w-full md:w-auto flex flex-col justify-center items-center">
-                        <h2 class="font-comfortaa text-lg font-bold">Your Health Score :
+                        <h2 class="font-comfortaa text-lg font-bold">Health Score :
                             {{ first_health_score }} %</h2>
 						<div class="font-comfortaa" id="chart"></div>
 					</div>
