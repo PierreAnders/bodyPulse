@@ -73,6 +73,9 @@ class HealthQuizz
     #[ORM\Column(nullable: true)]
     private ?bool $maintainingHealthyWeight = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -344,4 +347,16 @@ class HealthQuizz
 
     return ($rawScore / 20) * 100;
 }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }
