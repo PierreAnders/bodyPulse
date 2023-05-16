@@ -1,11 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}home{% endblock %}
+{% block title %}home
+{% endblock %}
 
 {% block body %}
-<body class="bg-emerald-700 bg-opacity-50 min-h-screen">
-    <div class="flex items-center justify-center min-h-screen">
-        <h1 class="text-6xl font-bold text-white font-comfortaa animate-heartbeat">PULSE</h1>
-    </div>
-</body>
+	<style>
+		@keyframes heartbeat {
+			0% {
+				transform: scale(1);
+			}
+			20% {
+				transform: scale(1.15);
+			}
+			40% {
+				transform: scale(1);
+			}
+		}
+
+		.heartbeat {
+			animation: heartbeat 0.8s 1;
+		}
+
+		.button-container {
+			position: relative;
+			text-align: center;
+			margin-top: 30px;
+			height: 30px;
+		}
+
+		.button-container.show-button {
+			opacity: 1;
+		}
+	</style>
+	<body class="bg-emerald-700 bg-opacity-50 min-h-screen">
+		<div class="flex flex-col items-center justify-center min-h-screen">
+			<h1 class="text-6xl font-bold text-white font-comfortaa heartbeat">PULSE</h1>
+			<div id="button-container" class="button-container text-xl hover:text-gray-300 text-white font-comfortaa font-bold duration-300"></div>
+		</div>
+
+		<script>
+			const dashboardUrl = "{{ path('dashboard') }}";
+            document.addEventListener('DOMContentLoaded', function () {
+            const heartbeatElement = document.querySelector('.heartbeat');
+
+            heartbeatElement.addEventListener('animationend', function () {
+            const buttonContainer = document.getElementById('button-container');
+            const enterButton = document.createElement('button');
+            enterButton.classList.add('heartbeat');
+            enterButton.innerText = 'Enter';
+
+            enterButton.addEventListener('click', function () {
+            window.location.href = dashboardUrl;
+            });
+
+            buttonContainer.appendChild(enterButton);
+            buttonContainer.classList.add('show-button');
+            requestAnimationFrame(function () {
+            enterButton.style.opacity = '1';
+            });
+            });
+            });
+		</script>
+	</body>
 {% endblock %}
