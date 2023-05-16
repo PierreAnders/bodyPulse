@@ -38,7 +38,7 @@
 					</div>
 				</div>
 			{% endfor %}
-			{% if health_quizz is defined %}
+			{% if first_health_score == false %}
 			<div class="mt-10">
 				<a href="{{ path('app_health_quizz_index')}}" class="pl-10 font-comfortaa font-bold underline underline-offset-[6px] hover:text-gray-400 duration-300">Answer Health Quizz</a>
 			</div>
@@ -48,16 +48,15 @@
 	</div>
 </div>
 <div class="pt-20 flex flex-col text-left items-center justify-center mb-20">
-	{# {% if first_health_quizz is defined %} #}
+	{% if first_health_score %}
 	<div class="font-bold text-xl font-comfortaa mb-8">Your health score is
 		{{ first_health_score }}%</div>
 	<div class="text-left text-cyan-700">
-		<div class="font-bold text-cyan-700 text-xl font-comfortaa mb-6">Advises</div>
+		<div class="font-bold text-cyan-700 text-xl font-comfortaa mb-6">Advises :</div>
 	{% for health_quizz in health_quizzs %}
 		{% if  health_quizz.physicalActivity == false %}
 			<div class="text-left">
-				Make more physical activity
-			</div>
+				<i class="fa-solid fa-bullseye"></i> Make more physical activity</div>
 		{% endif %}
 		{% if  health_quizz.goodEndurance == false %}
 			<div>
@@ -156,7 +155,7 @@
 		{% endif %}
 	</div>
 	{% endfor %}
-  {# {% endif %} #}
+  {% endif %}
 </div>
 <script>
 var width = 350
