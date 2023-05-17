@@ -38,6 +38,9 @@ class UserInformation
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $heartRate = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -144,6 +147,18 @@ class UserInformation
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getHeartRate(): ?int
+    {
+        return $this->heartRate;
+    }
+
+    public function setHeartRate(?int $heartRate): self
+    {
+        $this->heartRate = $heartRate;
 
         return $this;
     }

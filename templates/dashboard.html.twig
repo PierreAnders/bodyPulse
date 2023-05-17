@@ -7,159 +7,202 @@
 
 	<div class="pt-20 flex items-center justify-center">
 		<div class="ml-8">
-			<img src="{{ asset('img/female.svg') }}" alt="Description">
-		</div>
+			{% if not user_informations %}
+				<img src="{{ asset('img/male.svg') }}" alt="Description">
+			{% else %}
+				{% for user_information in user_informations %}
+					{% if user_information.gender == 'male' %}
+						<img src="{{ asset('img/male.svg') }}" alt="Description">
+					{% else %}
+						<img src="{{ asset('img/female.svg') }}" alt="Description">
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>>
+
 		<div>
 			<div class="flex flex-row flex-col items-center justify-center">
 				{% for user_information in user_informations %}
-					<div class="p-8">
-						<div class="pt-2">
-							<span class="font-bold text-xl font-comfortaa">
-								{{ user_information.firstName }}
-							</span>
-							<span class="font-bold text-xl font-comfortaa">{{ user_information.lastName }}
-							</span>
-						</div>
-						<div class="pt-2">
-							<span class="font-bold text-xl font-comfortaa">{{ user_information.height }}m /
-							</span>
-							<span class="font-bold text-xl font-comfortaa">{{ user_information.weight }}kg
-							</span>
-						</div>
-						<div class="pt-2">
-							<span class="font-bold text-xl font-comfortaa">BMI
-								{{ user_information.bmi|round(1) }}
-							</span>
-						</div>
+					<div class="p-8 hover:opacity-60 duration-300">
+						<a href="{{ path('app_user_information_index')}}">
+							<div class="pt-2">
+								<span class="font-bold text-xl font-comfortaa">
+									{{ user_information.firstName }}
+								</span>
+								<span class="font-bold text-xl font-comfortaa">{{ user_information.lastName }}
+								</span>
+							</div>
+							<div class="pt-2">
+								<span class="font-bold text-xl font-comfortaa">{{ user_information.height }}m /
+								</span>
+								<span class="font-bold text-xl font-comfortaa">{{ user_information.weight }}kg
+								</span>
+							</div>
+							{% if user_information.heartRate %}
+								<div class="pt-2">
+									<span class="font-bold text-xl font-comfortaa">{{ user_information.heartRate }}
+										bpm
+									</span>
+
+								</div>
+							{% endif %}
+							<div class="pt-2">
+								<span class="font-bold text-xl font-comfortaa">BMI
+									{{ user_information.bmi|round(1) }}
+								</span>
+							</div>
+						</a>
 					</div>
 				{% else %}
 					<div>
-						<a href="{{ path('app_user_information_index')}}" class="pl-10 font-comfortaa font-bold underline underline-offset-[6px] hover:text-gray-400 duration-300">Create Profile</a>
+						<a href="{{ path('app_user_information_new')}}" class="pl-10 font-comfortaa font-bold underline underline-offset-[6px] hover:text-gray-400 duration-300">Create Profile</a>
 					</div>
 				</div>
 			{% endfor %}
-			{% if health_quizz is defined %}
-			<div class="mt-10">
-				<a href="{{ path('app_health_quizz_index')}}" class="pl-10 font-comfortaa font-bold underline underline-offset-[6px] hover:text-gray-400 duration-300">Answer Health Quizz</a>
-			</div>
+			{% if first_health_score == false %}
+				<div class="mt-10">
+					<a href="{{ path('app_health_quizz_new')}}" class="pl-10 font-comfortaa font-bold underline underline-offset-[6px] hover:text-gray-400 duration-300">Answer Health Quizz</a>
+				</div>
 			{% endif %}
-			<div class="font-comfortaa" id="chart"></div>
+			<a class="hover:opacity-60 duration-300" href="{{ path('app_health_quizz_index')}}">
+				<div class="font-comfortaa" id="chart"></div>
+			</a>
 		</div>
 	</div>
 </div>
 <div class="pt-20 flex flex-col text-left items-center justify-center mb-20">
-	{# {% if first_health_quizz is defined %} #}
-	<div class="font-bold text-xl font-comfortaa mb-8">Your health score is
-		{{ first_health_score }}%</div>
-	<div class="text-left text-cyan-700">
-		<div class="font-bold text-cyan-700 text-xl font-comfortaa mb-6">Advises</div>
-	{% for health_quizz in health_quizzs %}
-		{% if  health_quizz.physicalActivity == false %}
-			<div class="text-left">
-				Make more physical activity
+	{% if first_health_score %}
+		<div class="font-bold text-xl font-comfortaa mb-8">Health score :
+			{{ first_health_score }}%</div>
+		<div class="text-left text-cyan-700 font-semibold">
+			<div class="font-bold text-cyan-700 text-xl font-comfortaa mb-4">Advises :</div>
+			{% for health_quizz in health_quizzs %}
+				{% if  health_quizz.physicalActivity == false %}
+					<div class="text-left">
+						<i class="fa-solid fa-bullseye"></i>
+						Make more physical activity</div>
+				{% endif %}
+				{% if  health_quizz.goodEndurance == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Make an activity to enhance your endurance (ex: running)</div>
+				{% endif %}
+				{% if  health_quizz.goodMuscularStrength == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Make a physical activity to enhance your strength (ex:climbing)</div>
+				{% endif %}
+				{% if  health_quizz.goodFlexibility == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Make a physical activity to enhance your flexibility (ex: yoga)</div>
+				{% endif %}
+				{% if  health_quizz.lowLevelOfStress == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Try an activity to get low stress (ex: meditation)</div>
+				{% endif %}
+				{% if  health_quizz.goodSleepQuality == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Establish a consistent sleep schedule
+					</div>
+				{% endif %}
+				{% if  health_quizz.healthyRelationships == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Establish a consistent sleep schedule
+					</div>
+				{% endif %}
+				{% if  health_quizz.healthyRelationships == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Cultivate effective communication skills
+					</div>
+				{% endif %}
+				{% if  health_quizz.emotionalWellBeing == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Practice self-compassion
+					</div>
+				{% endif %}
+				{% if  health_quizz.regularConsumptionOfFruitsAndVegetables == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Eat more fruits
+					</div>
+				{% endif %}
+				{% if  health_quizz.adequateProteinIntake == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Include a variety of protein sources in your die
+					</div>
+				{% endif %}
+				{% if  health_quizz.adequateFiberIntake == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Include a variety of fiber sources in your die
+					</div>
+				{% endif %}
+				{% if  health_quizz.adequateHydratation == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Drink more water</div>
+				{% endif %}
+				{% if  health_quizz.nonSmoker == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Reduce and stop your cigarette consumption
+					</div>
+				{% endif %}
+				{% if  health_quizz.moderateOrNoAlcoholConsumption == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Moderate or stop your alcohol consumption
+					</div>
+				{% endif %}
+				{% if  health_quizz.goodStressManagement == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Prioritize self-care
+					</div>
+				{% endif %}
+				{% if  health_quizz.sufficientAndQualitySleep == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Give more time to your sleep
+					</div>
+				{% endif %}
+				{% if  health_quizz.regularMedicalExaminations == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Get health checkups more regularly
+					</div>
+				{% endif %}
+				{% if  health_quizz.UpToDateVaccinations == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Be up to date with your vaccinations
+					</div>
+				{% endif %}
+				{% if  health_quizz.absenceOfUntreatedChronicHealthIssues == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Treat your chronic health problems
+					</div>
+				{% endif %}
+				{% if  health_quizz.maintainingHealthyWeight == false %}
+					<div>
+						<i class="fa-solid fa-bullseye"></i>
+						Maintain a healthy weight
+					</div>
+				{% endif %}
 			</div>
-		{% endif %}
-		{% if  health_quizz.goodEndurance == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Make an activity to enhance your endurance (ex: running)</div>
-		{% endif %}
-		{% if  health_quizz.goodMuscularStrength == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Make a physical activity to enhance your strength (ex:climbing)</div>
-		{% endif %}
-		{% if  health_quizz.goodFlexibility == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Make a physical activity to enhance your flexibility (ex: yoga)</div>
-		{% endif %}
-		{% if  health_quizz.lowLevelOfStress == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Try an activity to get low stress (ex: meditation)</div>
-		{% endif %}
-		{% if  health_quizz.goodSleepQuality == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Establish a consistent sleep schedule
-			</div>
-		{% endif %}
-		{% if  health_quizz.healthyRelationships == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Establish a consistent sleep schedule
-			</div>
-		{% endif %}
-		{% if  health_quizz.healthyRelationships == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Cultivate effective communication skills
-			</div>
-		{% endif %}
-		{% if  health_quizz.emotionalWellBeing == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Practice self-compassion
-			</div>
-		{% endif %}
-		{% if  health_quizz.regularConsumptionOfFruitsAndVegetables == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Eat more fruits
-			</div>
-		{% endif %}
-		{% if  health_quizz.adequateProteinIntake == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Include a variety of protein sources in your die
-			</div>
-		{% endif %}
-		{% if  health_quizz.adequateFiberIntake == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Include a variety of fiber sources in your die
-			</div>
-		{% endif %}
-		{% if  health_quizz.adequateHydratation == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Drink more water</div>
-		{% endif %}
-		{% if  health_quizz.nonSmoker == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Reduce and stop your cigarette consumption
-			</div>
-		{% endif %}
-		{% if  health_quizz.moderateOrNoAlcoholConsumption == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Moderate or stop your alcohol consumption
-			</div>
-		{% endif %}
-		{% if  health_quizz.goodStressManagement == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Prioritize self-care
-			</div>
-		{% endif %}
-		{% if  health_quizz.sufficientAndQualitySleep == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Give more time to your sleep
-			</div>
-		{% endif %}
-		{% if  health_quizz.regularMedicalExaminations == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Get health checkups more regularly
-			</div>
-		{% endif %}
-		{% if  health_quizz.UpToDateVaccinations == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Be up to date with your vaccinations
-			</div>
-		{% endif %}
-		{% if  health_quizz.absenceOfUntreatedChronicHealthIssues == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Treat your chronic health problems
-			</div>
-		{% endif %}
-		{% if  health_quizz.maintainingHealthyWeight == false %}
-			<div>
-				<i class="fa-solid fa-bullseye"></i> Maintain a healthy weight
-			</div>
-		{% endif %}
-	</div>
-	{% endfor %}
-  {# {% endif %} #}
+		{% endfor %}
+	{% endif %}
 </div>
 <script>
-var width = 350
+	var width = 350
 var height = 350
 var margin = 1
 
