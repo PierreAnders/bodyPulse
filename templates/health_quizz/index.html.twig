@@ -33,7 +33,7 @@
 									<th class="text-left">Up To Date Vaccinations</th>
 									<th class="text-left">Absence Of Untreated Chronic Health</th>
 									<th class="text-left">Maintaining Healthy Weight</th>
-									<th class="text-left"></th>
+									<th class="text-left mt-4"><a class="font-comfortaa font-bold underline underline-offset-[6px] hover:text-gray-600 duration-300" href="{{ path('dashboard')}}"> <<< </a></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -59,7 +59,7 @@
 										<td class="text-right">{{ health_quizz.UpToDateVaccinations ? 'Yes' : 'No' }}</td>
 										<td class="text-right">{{ health_quizz.absenceOfUntreatedChronicHealthIssues ? 'Yes' : 'No' }}</td>
 										<td class="text-right">{{ health_quizz.maintainingHealthyWeight ? 'Yes' : 'No' }}</td>
-										<td class="text-right">
+										<td class="text-right mt-4">
 											<a class="font-comfortaa font-bold underline underline-offset-[6px] hover:text-gray-600 duration-300" href="{{ path('app_health_quizz_edit', {'id': health_quizz.id}) }}">Edit</a>
 										</td>
 									</tr>

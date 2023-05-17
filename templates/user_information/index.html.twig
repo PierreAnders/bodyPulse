@@ -43,14 +43,21 @@
 							</span>
 						</div>
 						<div class="pt-2">
+							<span class="text-xl font-comfortaa">heart rate :</span>
+							<span class="font-bold text-xl font-comfortaa">{{ user_information.heartRate }}bpm
+							</span>
+						</div>
+						<div class="pt-2">
 							<span class="text-xl font-comfortaa">IMC :</span>
 							<span class="font-bold text-xl font-comfortaa">{{ user_information.bmi|round(1) }}
 							</span>
 						</div>
 						<div
-							class="mt-4">
+							class="mt-4 flex justify-between">
 							{# <a href="{{ path('app_user_information_show', {'id': user_information.id}) }}" class="text-blue-500">show</a> #}
+							<a href="{{ path('dashboard', {'id': user_information.id}) }}" class="font-bold text-lg font-comfortaa underline-offset-4"> <<< </a>
 							<a href="{{ path('app_user_information_edit', {'id': user_information.id}) }}" class="font-bold text-lg font-comfortaa underline-offset-4">Edit</a>
+
 						</div>
 					</div>
 				{% endfor %}

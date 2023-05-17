@@ -33,6 +33,7 @@ class UserInformationType extends AbstractType
             ->add('weight', NumberType::class, [
                 'scale' => 2,
             ])
+            ->add('heartRate')
         ;
     }
 
